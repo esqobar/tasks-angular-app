@@ -1,0 +1,54 @@
+<div class="container" style="margin-top: 15px;text-align: -webkit-center;">    
+  <div class="panel panel-secondary" style="width: 70%;text-align: -webkit-center;">    
+<!-- This is panel footer -->      
+<div class="panel-footer">      
+  <div class="form-group">      
+    <!-- Form that gets user input -->      
+    <form name="itemForm">      
+      <input id="Value" name="Value" required [(ngModel)]="newItem.Value" minlength="3" maxlength="10" style="width: 50%;" placeholder="Enter Any Item"      
+        class="form-control">      
+    </form>      
+    <br>      
+    <!-- Add button to add record -->      
+    <button type="submit" (click)="AddItem()" class="btn btn-default">Add</button>      
+  </div>      
+</div> 
+    
+  </div>    
+</div> 
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="container">
+          <h2>Todos</h2>
+          <div 
+          cdkDropList 
+          #todoList="cdkDropList" 
+          [cdkDropListData]="myItems"
+          [cdkDropListConnectedTo]="[doneTaskList]"
+          (cdkDropListDropped)="onDrop($event)">
+          <div class="task-block"  *ngFor="let data of myItems" cdkDrag>{{data.Value}}</div>
+       </div>
+       </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="container">
+          <h2>Done</h2>
+          <div 
+          cdkDropList 
+          #doneTaskList="cdkDropList" 
+          [cdkDropListData]="CompletedItems"
+          [cdkDropListConnectedTo]="[todoList]"  
+          (cdkDropListDropped)="onDrop($event)">
+          <div class="task-block" *ngFor="let completedItems of CompletedItems" cdkDrag>{{completedItems.Value}}</div>
+      </div>
+    </div>
+  </div>
+</div>
